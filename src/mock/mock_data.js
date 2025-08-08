@@ -14,13 +14,6 @@ export const mockData = {
           "icon": "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico"
         },
         {
-          "id": "linux-do",
-          "name": "LINUX DO",
-          "url": "https://linux.do",
-          "description": "Linux技术社区，Peace and Love",
-          "icon": "/sitelogo/linux.do.ico"
-        },
-        {
           "id": "github",
           "name": "GitHub",
           "url": "https://github.com",
@@ -672,7 +665,7 @@ export const mockData = {
         },
         {
           "id": "linuxdo",
-          "name": "Linux.do",
+          "name": "LINUX DO",
           "url": "https://linux.do",
           "description": "Linux与开源技术社区",
           "icon": "/sitelogo/linux.do.ico"
