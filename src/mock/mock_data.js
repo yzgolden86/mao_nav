@@ -956,6 +956,13 @@ export const mockData = {
           "icon": "/sitelogo/www.youtube.com.ico"
         },
         {
+          "id": "site-1756624515361",
+          "name": "MoonTV",
+          "url": "https://zpypwaeftnkj.ap-southeast-1.clawcloudrun.com/",
+          "description": "",
+          "icon": "https://zpypwaeftnkj.ap-southeast-1.clawcloudrun.com/icons/icon-192x192.png"
+        },
+        {
           "id": "douban",
           "name": "豆瓣",
           "url": "https://www.douban.com",
