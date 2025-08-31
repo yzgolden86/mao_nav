@@ -1035,7 +1035,7 @@ export const mockData = {
         {
           "id": "site-1754655722228",
           "name": "亿破姐",
-          "url": "https://www.ypojie.com/favicon.ico",
+          "url": "https://www.ypojie.com",
           "description": "",
           "icon": "https://www.ypojie.com/favicon.ico"
         },
