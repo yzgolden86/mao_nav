@@ -371,7 +371,7 @@ export const mockData = {
           "name": "中国知网",
           "url": "https://www.cnki.net/",
           "description": "",
-          "icon": "https://piccache.cnki.net/kdn/index/kns8s/nimages/logo.png"
+          "icon": "https://www.cnki.net/favicon.ico"
         },
         {
           "id": "site-1754650345263",
