@@ -53,7 +53,7 @@ export const mockData = {
           "name": "DeepL翻译",
           "url": "https://www.deepl.com/translator",
           "description": "DeepL translate",
-          "icon": "https://www.deepl.com/img/favicon/favicon_16.png"
+          "icon": "https://www.deepl.com/favicon.ico"
         },
         {
           "id": "site-1754648965575",
