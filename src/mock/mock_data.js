@@ -364,7 +364,7 @@ export const mockData = {
           "name": "SCI-Hub",
           "url": "https://sci-hub.ru/",
           "description": "将知识带给每个人",
-          "icon": "https://sci-hub.ru/pictures/ravenround.png"
+          "icon": "https://sci-hub.ru/favicon.ico"
         },
         {
           "id": "site-1754650266352",
@@ -399,7 +399,7 @@ export const mockData = {
           "name": "小木虫",
           "url": "https://muchong.com/",
           "description": "",
-          "icon": "https://muchongimg.xmcimg.com/data/emuch_bbs_images/favicon.ico"
+          "icon": "https://muchong.com/favicon.ico"
         },
         {
           "id": "site-1754650881558",
