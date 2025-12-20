@@ -67,14 +67,14 @@ export const mockData = {
           "name": "devv.ai",
           "url": "https://devv.ai/zh",
           "description": "",
-          "icon": "https://devv.ai/favicon-light.png"
+          "icon": "https://www.faviconextractor.com/favicon/devv.ai"
         },
         {
           "id": "site-1754649420209",
           "name": "huggingface",
           "url": "https://huggingface.co/",
           "description": "",
-          "icon": "https://huggingface.co/favicon.ico"
+          "icon": "https://www.faviconextractor.com/favicon/huggingface.co"
         }
       ]
     },
@@ -115,9 +115,9 @@ export const mockData = {
         {
           "id": "site-1754645905719",
           "name": "VPS监控",
-          "url": "https://fyjitvnk.us-east-1.clawcloudrun.com/",
+          "url": "https://yzkomari.zeabur.app",
           "description": "komari monitor",
-          "icon": "https://fyjitvnk.us-east-1.clawcloudrun.com/favicon.ico"
+          "icon": "https://www.faviconextractor.com/favicon/yzkomari.zeabur.app"
         },
         {
           "id": "site-1754646292507",
@@ -195,6 +195,20 @@ export const mockData = {
           "url": "https://navi.zlcom.pp.ua/",
           "description": "",
           "icon": "https://haozhang86.github.io/hz-pic/images/favicon.ico"
+        },
+        {
+          "id": "site-1766216342909",
+          "name": "Uptime Kuma",
+          "url": "https://yzkuma.zeabur.app",
+          "description": "",
+          "icon": "https://www.faviconextractor.com/favicon/yzkuma.zeabur.app"
+        },
+        {
+          "id": "site-1766216413457",
+          "name": "HZ Nav",
+          "url": "https://yzpanel.zeabur.app",
+          "description": "",
+          "icon": "https://www.faviconextractor.com/favicon/yzpanel.zeabur.app"
         }
       ]
     },
@@ -954,6 +968,13 @@ export const mockData = {
           "url": "https://www.youtube.com",
           "description": "视频分享平台",
           "icon": "/sitelogo/www.youtube.com.ico"
+        },
+        {
+          "id": "site-1766216159108",
+          "name": "lunaTV",
+          "url": "https://yzlunatv.zeabur.app",
+          "description": "lunaTV",
+          "icon": "https://www.faviconextractor.com/favicon/yzlunatv.zeabur.app"
         },
         {
           "id": "site-1756624515361",
