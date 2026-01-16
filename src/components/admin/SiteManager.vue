@@ -458,13 +458,10 @@ const testImage = async (imageUrl) => {
 // 使用Canvas方法下载图标（备用方案）
 const downloadIconViaCanvas = async (iconUrl, domain) => {
   console.log(`🎨 使用Canvas方法下载: ${iconUrl}`)
-
   return new Promise((resolve, reject) => {
     const img = new Image()
-
     // 设置跨域属性（如果图标服务支持CORS）
     img.crossOrigin = 'anonymous'
-
     img.onload = async () => {
       try {
         // 检查图片尺寸
@@ -472,40 +469,31 @@ const downloadIconViaCanvas = async (iconUrl, domain) => {
           reject(new Error(`图片尺寸无效 (${img.naturalWidth}x${img.naturalHeight})`))
           return
         }
-
         console.log(`✅ 图片加载成功，尺寸: ${img.naturalWidth}x${img.naturalHeight}`)
-
         // 创建canvas并绘制图片
         const canvas = document.createElement('canvas')
         canvas.width = img.naturalWidth
         canvas.height = img.naturalHeight
-
         const ctx = canvas.getContext('2d')
         ctx.drawImage(img, 0, 0)
-
         // 将canvas转换为blob
         canvas.toBlob(async (blob) => {
           if (!blob) {
             reject(new Error('Canvas转换为Blob失败'))
             return
           }
-
           // 将blob转换为arrayBuffer
           const arrayBuffer = await blob.arrayBuffer()
-
           // 检查文件大小
           if (arrayBuffer.byteLength < 100) {
             reject(new Error(`图标文件过小 (${arrayBuffer.byteLength} bytes)`))
             return
           }
-
           // 创建本地文件路径和文件名
           const fileName = `${domain}.ico`
           const localPath = `/sitelogo/${fileName}`
-
           // 创建data URL用于编辑期间的预览
           const dataUrl = URL.createObjectURL(blob)
-
           // 将图标数据缓存到内存中，等待后续上传
           pendingIcons.value.set(domain, {
             arrayBuffer,
@@ -513,27 +501,22 @@ const downloadIconViaCanvas = async (iconUrl, domain) => {
             localPath,
             domain
           })
-
           // 缓存预览URL，用于编辑期间显示
           const oldPreview = iconPreviews.value.get(localPath)
           if (oldPreview) {
             URL.revokeObjectURL(oldPreview)
           }
           iconPreviews.value.set(localPath, dataUrl)
-
           console.log(`✅ Canvas下载成功: ${localPath}，文件大小: ${arrayBuffer.byteLength} bytes`)
           resolve(localPath)
         }, 'image/png', 1.0) // 使用PNG格式，质量100%
-
       } catch (error) {
         reject(new Error(`Canvas处理失败: ${error.message}`))
       }
     }
-
     img.onerror = () => {
       reject(new Error(`图片加载失败: ${iconUrl}`))
     }
-
     // 加载图片
     img.src = iconUrl
   })
@@ -656,7 +639,7 @@ const tryFallbackServices = async (domain) => {
   // 首先尝试icon服务
   // 支持多个favicon服务轮询尝试
   const iconServiceUrls = [
-    // `https://www.faviconextractor.com/favicon/${domain}`,
+    `https://www.faviconextractor.com/favicon/${domain}`,
     `https://icon.maodeyu.fun/favicon/${domain}`
   ]
 
