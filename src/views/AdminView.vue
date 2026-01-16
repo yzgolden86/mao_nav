@@ -342,10 +342,19 @@ const skipLoading = async () => {
 const saveToGitHub = async () => {
   saving.value = true
   try {
-    // 保存完整的数据结构，包括title字段
+    // 先从 GitHub 加载当前完整数据，保留 search 等其他字段
+    let currentData = {}
+    try {
+      currentData = await loadCategoriesFromGitHub()
+    } catch (error) {
+      console.warn('加载当前数据失败，使用默认值:', error)
+    }
+    
+    // 保存完整的数据结构，包括search字段
     await saveCategoriesToGitHub({
       categories: categories.value,
-      title: navTitle.value
+      title: navTitle.value,
+      search: currentData.search || 'bing' // 保留搜索引擎设置
     })
     showDialog(
       'success',
