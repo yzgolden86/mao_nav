@@ -562,6 +562,13 @@ export const mockData = {
           "url": "https://www.bitiful.com/",
           "description": "对象存储，在线存储",
           "icon": "https://www.faviconextractor.com/favicon/www.bitiful.com"
+        },
+        {
+          "id": "site-1769680160203",
+          "name": "Aiven",
+          "url": "https://console.aiven.io",
+          "description": "在线免费数据库",
+          "icon": "https://www.faviconextractor.com/favicon/console.aiven.io"
         }
       ]
     },
