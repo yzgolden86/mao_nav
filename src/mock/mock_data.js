@@ -209,6 +209,13 @@ export const mockData = {
           "url": "https://yzpanel.zeabur.app",
           "description": "",
           "icon": "https://www.faviconextractor.com/favicon/yzpanel.zeabur.app"
+        },
+        {
+          "id": "site-1769674351138",
+          "name": "在线笔记",
+          "url": "https://note.685586.xyz",
+          "description": "在线笔记，存储，分享",
+          "icon": "https://www.faviconextractor.com/favicon/note.685586.xyz"
         }
       ]
     },
@@ -509,7 +516,7 @@ export const mockData = {
         },
         {
           "id": "site-1754652720469",
-          "name": "netlify",
+          "name": "Netlify",
           "url": "https://app.netlify.com/",
           "description": "",
           "icon": "https://app.netlify.com/favicon.ico"
@@ -527,6 +534,20 @@ export const mockData = {
           "url": "https://sso.qiniu.com/?client_id=PIapUKqa3u6S24H868BelwrG0OFu8dS7AxVQ8oz8HznLXhgrl2BnjaO9cs9LzxK2&redirect_url=https%3A%2F%2Fportal.qiniu.com%2Fapi%2Fgaea%2Fsso%2Fsignin%3Femail%3D%26redirect%3Dhttps%253A%252F%252Fportal.qiniu.com%252Fkodo",
           "description": "七牛云图床",
           "icon": "https://sso.qiniu.com/asserts/favicon.ico"
+        },
+        {
+          "id": "site-1769674242405",
+          "name": "TURSO",
+          "url": "https://turso.tech/app",
+          "description": "在线数据库",
+          "icon": "https://www.faviconextractor.com/favicon/turso.tech"
+        },
+        {
+          "id": "site-1769674271089",
+          "name": "Supabase",
+          "url": "https://supabase.com/dashboard",
+          "description": "在线数据库",
+          "icon": "https://www.faviconextractor.com/favicon/supabase.com"
         }
       ]
     },
@@ -1057,5 +1078,4 @@ export const mockData = {
     }
   ],
   "title": "HZ路标"
-  "_fileSha": "b03d0407ec06ac7f254abf6645ac0425a8e74a92"
 }
