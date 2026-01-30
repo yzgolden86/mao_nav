@@ -399,7 +399,7 @@ export const mockData = {
           "name": "中国知网",
           "url": "https://www.cnki.net/",
           "description": "",
-          "icon": "https://www.cnki.net/favicon.ico"
+          "icon": "https://www.faviconextractor.com/favicon/www.cnki.net"
         },
         {
           "id": "site-1754650345263",
@@ -427,7 +427,7 @@ export const mockData = {
           "name": "小木虫",
           "url": "https://muchong.com/",
           "description": "",
-          "icon": "https://muchong.com/favicon.ico"
+          "icon": "https://www.faviconextractor.com/favicon/muchong.com"
         },
         {
           "id": "site-1754650881558",
@@ -725,6 +725,13 @@ export const mockData = {
           "url": "https://www.52pojie.cn/",
           "description": "软件安全与破解技术论坛",
           "icon": "/sitelogo/www.52pojie.cn.ico"
+        },
+        {
+          "id": "site-1769758579503",
+          "name": "隔壁网",
+          "url": "https://www.gebi1.com/",
+          "description": "专注PT NAS",
+          "icon": "https://www.faviconextractor.com/favicon/www.gebi1.com"
         }
       ]
     },
@@ -761,20 +768,6 @@ export const mockData = {
           "url": "https://imgse.com/",
           "description": "免费图床",
           "icon": "https://imgse.com/content/images/system/favicon_1587118523486_91617a.png"
-        },
-        {
-          "id": "site-1754653536198",
-          "name": "4837图床",
-          "url": "https://img.4837.cloud/",
-          "description": "",
-          "icon": "https://img.4837.cloud/wp-content/themes/boxmoeUPimg/assets/images/user.jpg"
-        },
-        {
-          "id": "site-1754653745558",
-          "name": "真实地址生成器",
-          "url": "https://address.yzgo.me/",
-          "description": "",
-          "icon": "https://address.yzgo.me/favicon.ico"
         },
         {
           "id": "site-1754653790910",
