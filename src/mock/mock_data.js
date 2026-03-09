@@ -223,6 +223,13 @@ export const mockData = {
           "url": "https://note.zlcom.pp.ua",
           "description": "在线笔记简易版",
           "icon": "https://www.faviconextractor.com/favicon/note.zlcom.pp.ua"
+        },
+        {
+          "id": "site-1773063838009",
+          "name": "CF 临时邮箱",
+          "url": "https://tempmail.685586.xyz",
+          "description": "基于cloudflare搭建的临时邮箱",
+          "icon": "https://www.faviconextractor.com/favicon/tempmail.685586.xyz"
         }
       ]
     },
