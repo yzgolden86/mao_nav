@@ -1006,6 +1006,8 @@ onUnmounted(() => {
 .site-icon {
   width: 48px;
   height: 48px;
+  min-width: 48px;
+  flex-shrink: 0;
   margin-right: 16px;
   border-radius: 8px;
   overflow: hidden;
@@ -1025,6 +1027,8 @@ onUnmounted(() => {
 
 .site-info {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
   position: relative;
   z-index: 1;
 }
