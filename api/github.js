@@ -144,7 +144,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' })
 
   try {
-    const githubToken = process.env.GITHUB_TOKEN
+    const githubToken = (process.env.GITHUB_TOKEN || '').trim()
     if (!githubToken) {
       return res.status(500).json({ success: false, error: '服务端 GITHUB_TOKEN 未配置' })
     }

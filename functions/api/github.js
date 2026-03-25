@@ -160,7 +160,8 @@ export async function onRequestPost(context) {
   const { request, env } = context
 
   try {
-    if (!env.GITHUB_TOKEN) {
+    const githubToken = (env.GITHUB_TOKEN || '').trim()
+    if (!githubToken) {
       return new Response(
         JSON.stringify({ success: false, error: '服务端 GITHUB_TOKEN 未配置，请在 CF Pages 环境变量中添加 GITHUB_TOKEN（不带 VITE_ 前缀）' }),
         { status: 500, headers: corsHeaders },
@@ -187,7 +188,7 @@ export async function onRequestPost(context) {
     }
 
     const repoConfig = getRepoConfig(body, env)
-    const result = await actions[action](params, env.GITHUB_TOKEN, repoConfig)
+    const result = await actions[action](params, githubToken, repoConfig)
 
     return new Response(JSON.stringify({ success: true, data: result }), {
       status: 200, headers: corsHeaders,
