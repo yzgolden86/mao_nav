@@ -147,7 +147,10 @@ const actions = {
         Accept: 'application/vnd.github.v3+json',
       },
     })
-    if (!response.ok) throw new Error('GitHub 连接失败')
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}))
+      throw new Error(`GitHub 连接失败 (${response.status}): ${error.message || response.statusText}`)
+    }
     const repoInfo = await response.json()
     return { connected: true, repo: repoInfo.full_name, permissions: repoInfo.permissions }
   },
@@ -159,7 +162,7 @@ export async function onRequestPost(context) {
   try {
     if (!env.GITHUB_TOKEN) {
       return new Response(
-        JSON.stringify({ success: false, error: '服务端 GITHUB_TOKEN 未配置' }),
+        JSON.stringify({ success: false, error: '服务端 GITHUB_TOKEN 未配置，请在 CF Pages 环境变量中添加 GITHUB_TOKEN（不带 VITE_ 前缀）' }),
         { status: 500, headers: corsHeaders },
       )
     }

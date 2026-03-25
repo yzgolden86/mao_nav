@@ -126,7 +126,10 @@ const actions = {
         Accept: 'application/vnd.github.v3+json',
       },
     })
-    if (!response.ok) throw new Error('GitHub 连接失败')
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}))
+      throw new Error(`GitHub 连接失败 (${response.status}): ${error.message || response.statusText}`)
+    }
     const repoInfo = await response.json()
     return { connected: true, repo: repoInfo.full_name, permissions: repoInfo.permissions }
   },
