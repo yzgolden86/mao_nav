@@ -15,7 +15,7 @@
 - 2025-07-22 增加站点拖拽排序，优化icon获取。
 - 2025-07-30 修复item展示问题，增加环境变量VITE_OPEN_LOCK，配置首页也需验证密码。
 - 2025-08-11 增加夜间模式，增加默认搜索引擎设置功能。
-- **2.0.0** 安全架构升级：密钥迁移至服务端 Functions，同时支持 Cloudflare Pages 和 Vercel 部署。
+- 2025-03-25 **v2.0.0** 安全架构升级：密钥迁移至服务端 Functions，同时支持 Cloudflare Pages 和 Vercel 部署。
 
 ## 🔄 从 v1.x 升级到 v2.0
 
@@ -37,8 +37,8 @@ git merge upstream/master
 
 | 操作 | 变量名 | 说明 |
 |---|---|---|
-| **新增** | `ADMIN_PASSWORD` | 值与原来的 `VITE_ADMIN_PASSWORD` 一致 |
-| **新增** | `GITHUB_TOKEN` | 值与原来的 `VITE_GITHUB_TOKEN` 一致 |
+| **新增** | `ADMIN_PASSWORD` | 值与原来的 `VITE_ADMIN_PASSWORD` 一致，**设置为 Encrypted 类型** |
+| **新增** | `GITHUB_TOKEN` | 值与原来的 `VITE_GITHUB_TOKEN` 一致，**设置为 Encrypted 类型** |
 | **保留** | `VITE_GITHUB_OWNER` | 不变 |
 | **保留** | `VITE_GITHUB_REPO` | 不变 |
 | **保留** | `VITE_GITHUB_BRANCH` | 不变 |
@@ -137,10 +137,16 @@ v2.0 起，敏感密钥存储在服务端（通过 Serverless Functions），前
 
 #### 服务端密钥（不加 VITE_ 前缀，前端不可见）
 
-| 变量名 | 必填 | 说明 |
-|---|---|---|
-| `ADMIN_PASSWORD` | 是 | 管理员登录密钥，自定义任意字符串 |
-| `GITHUB_TOKEN` | 是 | GitHub Personal Access Token，用于读写仓库文件 |
+> **重要**：这两个变量请在部署平台中设置为 **Encrypted（加密）** 类型：
+> - Cloudflare Pages：添加变量时选择 **Encrypt** 按钮
+> - Vercel：添加变量时勾选 **Sensitive** 选项
+>
+> 加密后变量值在后台不可查看，防止他人登录你的平台账号后直接看到密钥。
+
+| 变量名 | 必填 | 类型 | 说明 |
+|---|---|---|---|
+| `ADMIN_PASSWORD` | 是 | Encrypted | 管理员登录密钥，自定义任意字符串 |
+| `GITHUB_TOKEN` | 是 | Encrypted | GitHub Personal Access Token，用于读写仓库文件 |
 
 #### 前端配置（VITE_ 前缀，构建时注入）
 
