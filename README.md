@@ -342,6 +342,7 @@ npm run build && npx wrangler pages dev dist
 
 ## 🙏 致谢
 
+- [LINUX DO](https://linux.do/) - 感谢 LINUX DO 社区的支持与认可
 - [Vue.js](https://vuejs.org/) - 渐进式 JavaScript 框架
 - [Vite](https://vitejs.dev/) - 下一代前端构建工具
 - [Cloudflare Pages](https://pages.cloudflare.com/) - 现代化的 JAMstack 平台
