@@ -341,26 +341,27 @@ const checkLockStatus = () => {
   }
 }
 
-// 处理解锁
+// 处理解锁（通过服务端验证）
 const handleUnlock = async () => {
   unlocking.value = true
   unlockError.value = ''
 
-    try {
-    const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD
+  try {
+    const response = await fetch('/api/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: unlockPassword.value }),
+    })
 
-    if (!adminPassword) {
-      throw new Error('访问密钥未配置')
+    const result = await response.json()
+
+    if (!result.success) {
+      throw new Error(result.error || '访问密钥错误，请重新输入')
     }
 
-    if (unlockPassword.value === adminPassword) {
-      isUnlocked.value = true
-      localStorage.setItem('nav_unlocked', 'true')
-      unlockPassword.value = ''
-      console.log('导航站解锁成功')
-    } else {
-      throw new Error('访问密钥错误，请重新输入')
-    }
+    isUnlocked.value = true
+    localStorage.setItem('nav_unlocked', 'true')
+    unlockPassword.value = ''
   } catch (error) {
     unlockError.value = error.message
   } finally {

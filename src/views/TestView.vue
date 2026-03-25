@@ -55,14 +55,11 @@ const checkEnvVars = () => {
     '当前环境': import.meta.env.MODE,
     '构建时间': new Date().toLocaleString(),
     '域名': window.location.hostname,
-    '环境变量检查': {
-      VITE_ADMIN_PASSWORD: import.meta.env.VITE_ADMIN_PASSWORD ? '已配置' : '未配置',
-      VITE_GITHUB_TOKEN: import.meta.env.VITE_GITHUB_TOKEN ?
-        `已配置 (${import.meta.env.VITE_GITHUB_TOKEN.substring(0, 10)}...)` : '未配置',
-      VITE_GITHUB_OWNER: import.meta.env.VITE_GITHUB_OWNER || '未配置',
-      VITE_GITHUB_REPO: import.meta.env.VITE_GITHUB_REPO || '未配置',
-      VITE_GITHUB_BRANCH: import.meta.env.VITE_GITHUB_BRANCH || '未配置'
-    }
+    '说明': '敏感环境变量已迁移至服务端 (CF Pages Functions)，前端不可见',
+    '前端环境变量': {
+      VITE_OPEN_LOCK: import.meta.env.VITE_OPEN_LOCK || '未配置',
+    },
+    '服务端环境变量': '(ADMIN_PASSWORD, GITHUB_TOKEN 等) — 通过 /api/* 接口访问'
   }
 
   envResult.value = JSON.stringify(result, null, 2)
