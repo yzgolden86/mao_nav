@@ -14,6 +14,7 @@ function encodePath(path) {
 async function githubFetch(url, options, timeoutMs = 15000) {
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
+  options.headers = { 'User-Agent': 'mao-nav-server', ...options.headers }
   try {
     const response = await fetch(url, { ...options, signal: controller.signal })
     clearTimeout(timeoutId)
