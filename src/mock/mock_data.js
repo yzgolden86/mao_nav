@@ -201,10 +201,32 @@ export const mockData = {
       ]
     },
     {
+      "id": "category-1774510899116",
+      "icon": "☠️",
+      "name": "DDDD",
+      "order": 4,
+      "sites": [
+        {
+          "id": "site-1774510993770",
+          "name": "RiskTest",
+          "url": "https://risk.copolits.com/",
+          "description": "检测风控",
+          "icon": "https://www.faviconextractor.com/favicon/risk.copolits.com"
+        },
+        {
+          "id": "site-1774511036557",
+          "name": "虚拟地址",
+          "url": "https://ip-geoaddress-generator.pages.dev/",
+          "description": "获取当前ip地址",
+          "icon": "https://www.faviconextractor.com/favicon/ip-geoaddress-generator.pages.dev"
+        }
+      ]
+    },
+    {
       "id": "community",
       "name": "社区论坛",
       "icon": "👥",
-      "order": 4,
+      "order": 5,
       "sites": [
         {
           "id": "linuxdo",
@@ -247,7 +269,7 @@ export const mockData = {
       "id": "design",
       "name": "设计工具",
       "icon": "🎨",
-      "order": 5,
+      "order": 6,
       "sites": [
         {
           "id": "figma",
@@ -283,7 +305,7 @@ export const mockData = {
       "id": "finance",
       "name": "财经投资",
       "icon": "💰",
-      "order": 6,
+      "order": 7,
       "sites": [
         {
           "id": "binance",
@@ -347,7 +369,7 @@ export const mockData = {
       "id": "learning",
       "name": "学习资源",
       "icon": "📚",
-      "order": 7,
+      "order": 8,
       "sites": [
         {
           "id": "mdn",
@@ -383,7 +405,7 @@ export const mockData = {
       "id": "tools",
       "name": "在线工具",
       "icon": "⚙️",
-      "order": 8,
+      "order": 9,
       "sites": [
         {
           "id": "json-formatter",
@@ -419,7 +441,7 @@ export const mockData = {
       "id": "entertainment",
       "name": "娱乐休闲",
       "icon": "🎮",
-      "order": 9,
+      "order": 10,
       "sites": [
         {
           "id": "bilibili",
@@ -448,28 +470,6 @@ export const mockData = {
           "url": "https://www.zhihu.com",
           "description": "知识问答社区",
           "icon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='black'%3E%3Cpath d='M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82A7.65 7.65 0 018 4.58c.68.003 1.36.092 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z'/%3E%3C/svg%3E"
-        }
-      ]
-    },
-    {
-      "id": "category-1774510899116",
-      "icon": "☠️",
-      "name": "DDDD",
-      "order": 1,
-      "sites": [
-        {
-          "id": "site-1774510993770",
-          "name": "RiskTest",
-          "url": "https://risk.copolits.com/",
-          "description": "检测风控",
-          "icon": "https://www.faviconextractor.com/favicon/risk.copolits.com"
-        },
-        {
-          "id": "site-1774511036557",
-          "name": "虚拟地址",
-          "url": "https://ip-geoaddress-generator.pages.dev/",
-          "description": "获取当前ip地址",
-          "icon": "https://www.faviconextractor.com/favicon/ip-geoaddress-generator.pages.dev"
         }
       ]
     },
