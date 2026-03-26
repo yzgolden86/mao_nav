@@ -352,6 +352,12 @@ const handleImageError = (event) => {
   gap: 20px;
 }
 
+.draggable-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .category-item {
   background: #f8f9fa;
   border-radius: 8px;
