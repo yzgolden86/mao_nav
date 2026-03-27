@@ -21,6 +21,13 @@ export const mockData = {
           "icon": "/sitelogo/curlconverter.com.ico"
         },
         {
+          "id": "site-1774601326477",
+          "name": "猫猫绘图",
+          "url": "https://fast.catsapi.com",
+          "description": "文生图，图生图，文生视频站点",
+          "icon": "https://www.faviconextractor.com/favicon/fast.catsapi.com"
+        },
+        {
           "id": "linux-do",
           "name": "Linux.do",
           "url": "https://linux.do",
