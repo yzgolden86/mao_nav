@@ -216,6 +216,13 @@ export const mockData = {
           "url": "https://panel.yiz.pp.ua",
           "description": "",
           "icon": "https://www.faviconextractor.com/favicon/panel.yiz.pp.ua"
+        },
+        {
+          "id": "site-1775306809248",
+          "name": "宏迪",
+          "url": "https://www.reddit.com",
+          "description": "",
+          "icon": "https://www.faviconextractor.com/favicon/www.reddit.com"
         }
       ]
     },
