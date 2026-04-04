@@ -30,6 +30,13 @@ export const mockData = {
       ]
     },
     {
+      "id": "category-1775292786984",
+      "icon": "🛠️",
+      "name": "自建服务",
+      "order": 1,
+      "sites": []
+    },
+    {
       "id": "ai-tools",
       "name": "AI智能",
       "icon": "🤖",
@@ -555,7 +562,7 @@ export const mockData = {
       "id": "community",
       "name": "社区论坛",
       "icon": "👥",
-      "order": 5,
+      "order": 6,
       "sites": [
         {
           "id": "linuxdo",
