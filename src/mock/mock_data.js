@@ -114,7 +114,7 @@ export const mockData = {
         },
         {
           "id": "site-1754646292507",
-          "name": "sink短链服务",
+          "name": "Sink短链服务",
           "url": "https://sink.685586.xyz/",
           "description": "",
           "icon": "https://sink.685586.xyz/icon-192.png"
@@ -149,7 +149,7 @@ export const mockData = {
         },
         {
           "id": "site-1754647007633",
-          "name": "sublink",
+          "name": "Sublink",
           "url": "https://sublink.zlcom.pp.ua/",
           "description": "",
           "icon": "https://cn.cravatar.com/avatar/9240d78bbea4cf05fb04f2b86f22b18d?s=160&d=retro&r=g"
@@ -184,10 +184,38 @@ export const mockData = {
         },
         {
           "id": "site-1754649702151",
-          "name": "cloudflare 导航",
+          "name": "Cloudflare 导航",
           "url": "https://navi.zlcom.pp.ua/",
           "description": "",
-          "icon": "https://haozhang86.github.io/hz-pic/images/favicon.ico"
+          "icon": "https://www.faviconextractor.com/favicon/navi.zlcom.pp.ua"
+        },
+        {
+          "id": "site-1775293697627",
+          "name": "CF 临时邮箱",
+          "url": "https://mail.yzgo.de5.net/",
+          "description": "",
+          "icon": "https://www.faviconextractor.com/favicon/mail.yzgo.de5.net"
+        },
+        {
+          "id": "site-1775293787595",
+          "name": "在线笔记 WebNote",
+          "url": "https://note.685586.xyz/",
+          "description": "",
+          "icon": "https://www.faviconextractor.com/favicon/note.685586.xyz"
+        },
+        {
+          "id": "site-1775293874627",
+          "name": "CF edgetunnel",
+          "url": "https://freego.smtech.ggff.net",
+          "description": "",
+          "icon": "https://www.faviconextractor.com/favicon/freego.smtech.ggff.net"
+        },
+        {
+          "id": "site-1775295404285",
+          "name": "panel 导航",
+          "url": "https://panel.yiz.pp.ua",
+          "description": "",
+          "icon": "https://www.faviconextractor.com/favicon/panel.yiz.pp.ua"
         }
       ]
     },
