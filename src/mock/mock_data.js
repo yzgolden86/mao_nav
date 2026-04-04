@@ -21,11 +21,53 @@ export const mockData = {
           "icon": "/sitelogo/github.com.ico"
         },
         {
-          "id": "curlconverter",
-          "name": "curl converter",
-          "url": "https://curlconverter.com/",
-          "description": "curl命令转换工具",
-          "icon": "/sitelogo/curlconverter.com.ico"
+          "id": "site-1754648037563",
+          "name": "Grep",
+          "url": "https://grep.app/",
+          "description": "d代码搜索",
+          "icon": "https://grep.app/icon.png?27d38f126102b607"
+        },
+        {
+          "id": "site-1754648568513",
+          "name": "秘塔AI搜索",
+          "url": "https://metaso.cn/",
+          "description": "",
+          "icon": "https://metaso.cn/apple-touch-icon.png"
+        },
+        {
+          "id": "site-1754648779538",
+          "name": "天大邮箱",
+          "url": "https://mail.tju.edu.cn/",
+          "description": "",
+          "icon": "https://mailh.qiye.163.com/static/mimg/o/domain/202302021830/index/img/icon-dashi.png"
+        },
+        {
+          "id": "site-1754649491055",
+          "name": "biz.mail.ru",
+          "url": "https://e.mail.ru/inbox",
+          "description": "域名邮箱otech@",
+          "icon": "https://static.vk.com/vkid/1.1.1205/apple-touch-icon-new.png?1"
+        },
+        {
+          "id": "site-1754648861876",
+          "name": "DeepL翻译",
+          "url": "https://www.deepl.com/translator",
+          "description": "DeepL translate",
+          "icon": "https://www.deepl.com/img/favicon/favicon_16.png"
+        },
+        {
+          "id": "site-1754648965575",
+          "name": "News Reader",
+          "url": "https://read.123455.xyz/",
+          "description": "新闻资讯",
+          "icon": "https://read.123455.xyz/static/favicon.svg"
+        },
+        {
+          "id": "site-1754649420209",
+          "name": "huggingface",
+          "url": "https://huggingface.co/",
+          "description": "",
+          "icon": "https://huggingface.co/favicon.ico"
         }
       ]
     },
@@ -34,7 +76,120 @@ export const mockData = {
       "icon": "🛠️",
       "name": "自建服务",
       "order": 1,
-      "sites": []
+      "sites": [
+        {
+          "id": "site-1754645255700",
+          "name": "HZの主页",
+          "url": "https://home.685586.xyz/",
+          "description": "简易主页",
+          "icon": "https://home.685586.xyz/images/icon/favicon.ico"
+        },
+        {
+          "id": "site-1754646780080",
+          "name": "HZ的自留地",
+          "url": "https://blog.685586.xyz/",
+          "description": "",
+          "icon": "https://blog.685586.xyz/img/favicon.png"
+        },
+        {
+          "id": "site-1754645281176",
+          "name": "Telegraph-imgbed",
+          "url": "https://tggraph1.zlcom.pp.ua/",
+          "description": "tg图床",
+          "icon": "https://tggraph1.zlcom.pp.ua/logo.png"
+        },
+        {
+          "id": "site-1754645742875",
+          "name": "不灵图床",
+          "url": "https://imgbed.685586.xyz",
+          "description": "基于CF的图床，R2存储",
+          "icon": "https://imgbed.685586.xyz/logo.png"
+        },
+        {
+          "id": "site-1754645905719",
+          "name": "VPS监控",
+          "url": "https://fyjitvnk.us-east-1.clawcloudrun.com/",
+          "description": "komari monitor",
+          "icon": "https://fyjitvnk.us-east-1.clawcloudrun.com/favicon.ico"
+        },
+        {
+          "id": "site-1754646292507",
+          "name": "sink短链服务",
+          "url": "https://sink.685586.xyz/",
+          "description": "",
+          "icon": "https://sink.685586.xyz/icon-192.png"
+        },
+        {
+          "id": "site-1754646610236",
+          "name": "TTS worker",
+          "url": "https://googletts2.zlcom.pp.ua/",
+          "description": "google TTS",
+          "icon": ""
+        },
+        {
+          "id": "site-1754646664615",
+          "name": "WebTTS",
+          "url": "https://webtts.zlcom.pp.ua/",
+          "description": "",
+          "icon": "https://api.iconify.design/arcticons:tts-server.svg"
+        },
+        {
+          "id": "site-1754646719992",
+          "name": "Ugly Face",
+          "url": "https://uglyface.685586.xyz/",
+          "description": "",
+          "icon": "https://uglyface.685586.xyz/favicon.ico"
+        },
+        {
+          "id": "site-1754646855132",
+          "name": "阅后即焚",
+          "url": "https://encrypt.zlcom.pp.ua/",
+          "description": "阅后即焚",
+          "icon": "https://api.iconify.design/logos:letsencrypt.svg"
+        },
+        {
+          "id": "site-1754647007633",
+          "name": "sublink",
+          "url": "https://sublink.zlcom.pp.ua/",
+          "description": "",
+          "icon": "https://cn.cravatar.com/avatar/9240d78bbea4cf05fb04f2b86f22b18d?s=160&d=retro&r=g"
+        },
+        {
+          "id": "site-1754647116947",
+          "name": "Serv00监控",
+          "url": "https://serv00.zlcom.pp.ua/",
+          "description": "serv00 服务器监控",
+          "icon": "https://api.dicebear.com/7.x/bottts/svg?seed=monitor"
+        },
+        {
+          "id": "site-1754647497536",
+          "name": "Wallhaven API",
+          "url": "https://imgapi.zltrade.pp.ua/",
+          "description": "图片API，来自wallhaven",
+          "icon": "https://wallhaven.cc/favicon.ico"
+        },
+        {
+          "id": "site-1754647636330",
+          "name": "Web Extractor",
+          "url": "https://extract.685586.xyz/",
+          "description": "智能网页内容提取",
+          "icon": "https://extract.685586.xyz/favicon.ico"
+        },
+        {
+          "id": "site-1754647718237",
+          "name": "CodeDiff",
+          "url": "https://code.zltrade.pp.ua",
+          "description": "比较代码差异",
+          "icon": "https://api.iconify.design/ic:twotone-terminal.svg"
+        },
+        {
+          "id": "site-1754649702151",
+          "name": "cloudflare 导航",
+          "url": "https://navi.zlcom.pp.ua/",
+          "description": "",
+          "icon": "https://haozhang86.github.io/hz-pic/images/favicon.ico"
+        }
+      ]
     },
     {
       "id": "ai-tools",
