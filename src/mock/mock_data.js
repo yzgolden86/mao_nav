@@ -632,6 +632,13 @@ export const mockData = {
           "url": "https://console.aiven.io",
           "description": "在线免费数据库",
           "icon": "https://www.faviconextractor.com/favicon/console.aiven.io"
+        },
+        {
+          "id": "site-1775310139676",
+          "name": "52公益站",
+          "url": "https://free.9e.nz",
+          "description": "",
+          "icon": "https://www.faviconextractor.com/favicon/free.9e.nz"
         }
       ]
     },
