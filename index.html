@@ -2,9 +2,19 @@
 <html lang="">
   <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="public/favicon.ico">
+    <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mao Nav</title>
+    <title>HZ路标</title>
+    <script>
+      try {
+        const cachedTitle = localStorage.getItem('site_title')
+        if (cachedTitle) {
+          document.title = cachedTitle
+        }
+      } catch (error) {
+        console.warn('Failed to restore cached site title.', error)
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>

@@ -1,6 +1,20 @@
 import { ref } from 'vue'
 import { mockData } from '../mock/mock_data.js'
 
+const SEARCH_ENGINES = ['google', 'baidu', 'bing', 'duckduckgo']
+
+function cacheSiteTitle(siteTitle) {
+  try {
+    localStorage.setItem('site_title', siteTitle)
+  } catch (error) {
+    console.warn('Failed to cache site title.', error)
+  }
+}
+
+function resolveSearchEngine(searchEngine) {
+  return SEARCH_ENGINES.includes(searchEngine) ? searchEngine : 'bing'
+}
+
 export function useNavigation() {
   const categories = ref([])
   const title = ref('')
@@ -13,42 +27,21 @@ export function useNavigation() {
     error.value = null
 
     try {
-      // 开发环境模拟网络延迟
-      if (import.meta.env.DEV) {
-        await new Promise(resolve => setTimeout(resolve, 500))
-      }
-
-      // 默认使用本地mock数据
       categories.value = mockData.categories
       title.value = mockData.title
+      defaultSearchEngine.value = resolveSearchEngine(mockData.search)
 
-      // 设置默认搜索引擎，如果未指定或不存在则使用bing
-      const searchEngines = ['google', 'baidu', 'bing', 'duckduckgo']
-      if (mockData.search && searchEngines.includes(mockData.search)) {
-        defaultSearchEngine.value = mockData.search
-      } else {
-        defaultSearchEngine.value = 'bing'
-      }
-
-      // 动态设置页面标题
+      cacheSiteTitle(title.value)
       document.title = title.value
-
-
     } catch (err) {
       error.value = err.message
       console.error('Error fetching categories:', err)
-      // 兜底：始终返回 mock 数据
+
       categories.value = mockData.categories
       title.value = mockData.title
+      defaultSearchEngine.value = resolveSearchEngine(mockData.search)
 
-      // 设置默认搜索引擎
-      const searchEngines = ['google', 'baidu', 'bing', 'duckduckgo']
-      if (mockData.search && searchEngines.includes(mockData.search)) {
-        defaultSearchEngine.value = mockData.search
-      } else {
-        defaultSearchEngine.value = 'bing'
-      }
-
+      cacheSiteTitle(title.value)
       document.title = title.value
     } finally {
       loading.value = false
@@ -61,6 +54,6 @@ export function useNavigation() {
     defaultSearchEngine,
     loading,
     error,
-    fetchCategories
+    fetchCategories,
   }
 }
