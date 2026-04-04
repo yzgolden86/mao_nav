@@ -85,17 +85,22 @@
                 class="search-input"
                 @focus="handleSearchFocus"
                 @blur="handleSearchBlur"
-                @keyup.enter="handleSearch"
+                @keydown.down.prevent="moveHighlightedResult(1)"
+                @keydown.up.prevent="moveHighlightedResult(-1)"
+                @keydown.esc.prevent="clearSearchPanel"
+                @keydown.enter.prevent="handleSearch"
               />
 
               <transition name="search-panel">
                 <div v-if="shouldShowLocalResults" class="local-search-results">
                   <template v-if="localSearchResults.length">
                     <button
-                      v-for="site in localSearchResults"
+                      v-for="(site, index) in localSearchResults"
                       :key="site.id"
                       type="button"
                       class="local-search-item"
+                      :class="{ active: index === highlightedSearchIndex }"
+                      @mouseenter="highlightedSearchIndex = index"
                       @mousedown.prevent="openLocalResult(site)"
                     >
                       <span class="local-search-item-name">{{ site.name }}</span>
@@ -207,7 +212,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useNavigation } from '@/apis/useNavigation.js'
 import { useThemeStore } from '@/stores/counter.js'
 import googleLogo from '@/assets/goolge.png'
@@ -228,6 +233,7 @@ const unlockPassword = ref('')
 const unlocking = ref(false)
 const unlockError = ref('')
 const isSearchFocused = ref(false)
+const highlightedSearchIndex = ref(-1)
 
 let searchBlurTimer = null
 
@@ -333,6 +339,21 @@ const shouldShowLocalResults = computed(
   () => isSearchFocused.value && searchQuery.value.trim().length > 0,
 )
 
+watch(localSearchResults, (results) => {
+  if (!results.length) {
+    highlightedSearchIndex.value = -1
+    return
+  }
+
+  if (highlightedSearchIndex.value >= results.length) {
+    highlightedSearchIndex.value = results.length - 1
+  }
+})
+
+watch(searchQuery, () => {
+  highlightedSearchIndex.value = -1
+})
+
 const smoothScrollTo = (container, targetTop) => {
   container.scrollTo({
     top: targetTop,
@@ -405,6 +426,7 @@ const openLocalResult = (site) => {
   window.open(site.url, '_blank')
   searchQuery.value = ''
   isSearchFocused.value = false
+  highlightedSearchIndex.value = -1
 }
 
 const handleSearchFocus = () => {
@@ -423,9 +445,46 @@ const handleSearchBlur = () => {
   }, 120)
 }
 
+const moveHighlightedResult = (step) => {
+  if (!localSearchResults.value.length) return
+
+  const lastIndex = localSearchResults.value.length - 1
+  if (highlightedSearchIndex.value === -1) {
+    highlightedSearchIndex.value = step > 0 ? 0 : lastIndex
+    return
+  }
+
+  const nextIndex = highlightedSearchIndex.value + step
+
+  if (nextIndex > lastIndex) {
+    highlightedSearchIndex.value = 0
+    return
+  }
+
+  if (nextIndex < 0) {
+    highlightedSearchIndex.value = lastIndex
+    return
+  }
+
+  highlightedSearchIndex.value = nextIndex
+}
+
+const clearSearchPanel = () => {
+  highlightedSearchIndex.value = -1
+  isSearchFocused.value = false
+}
+
 const handleSearch = () => {
   const query = searchQuery.value.trim()
   if (!query) return
+
+  if (
+    highlightedSearchIndex.value >= 0
+    && highlightedSearchIndex.value < localSearchResults.value.length
+  ) {
+    openLocalResult(localSearchResults.value[highlightedSearchIndex.value])
+    return
+  }
 
   const [firstMatch] = localSearchResults.value
   if (firstMatch) {
@@ -480,7 +539,9 @@ onUnmounted(() => {
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
+  background:
+    radial-gradient(circle at top right, rgba(148, 163, 184, 0.14), transparent 26%),
+    linear-gradient(180deg, #f7f9fc 0%, #edf2f8 100%);
 }
 
 .sidebar {
@@ -495,7 +556,7 @@ onUnmounted(() => {
   background: linear-gradient(180deg, #213043 0%, #182334 100%);
   color: #fff;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 2px 0 16px rgba(15, 23, 42, 0.1);
+  box-shadow: 2px 0 16px rgba(15, 23, 42, 0.08);
 }
 
 .logo-section {
@@ -553,19 +614,19 @@ onUnmounted(() => {
 .category-item {
   padding: 12px 20px;
   border-radius: 0 14px 14px 0;
-  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  transition: background-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
 }
 
 .category-item:hover {
   background: rgba(255, 255, 255, 0.08);
-  box-shadow: inset 3px 0 0 #5eead4;
+  box-shadow: inset 3px 0 0 rgba(94, 234, 212, 0.92);
   transform: translateX(2px);
 }
 
 .sidebar-footer {
-  padding: 18px 20px 22px;
+  padding: 18px 18px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -578,13 +639,15 @@ onUnmounted(() => {
   border-radius: 14px;
   color: rgba(255, 255, 255, 0.82);
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.06);
-  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
 .github-link:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
   transform: translateY(-1px);
 }
 
@@ -603,7 +666,7 @@ onUnmounted(() => {
   align-items: center;
   gap: 14px;
   padding: 20px 24px;
-  background: #f7fafc;
+  background: rgba(247, 250, 252, 0.92);
   border-bottom: 1px solid rgba(148, 163, 184, 0.16);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
 }
@@ -621,13 +684,13 @@ onUnmounted(() => {
   border-radius: 16px;
   background: #fff;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
-  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+  transition: box-shadow 0.16s ease, border-color 0.16s ease;
 }
 
 .search-container:hover,
 .search-container:focus-within {
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
   border-color: #cbd5e1;
 }
 
@@ -693,7 +756,7 @@ onUnmounted(() => {
   border-radius: 16px;
   background: #fff;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.1);
 }
 
 .search-panel-enter-active,
@@ -723,6 +786,11 @@ onUnmounted(() => {
 
 .local-search-item:hover {
   background: #f8fafc;
+  transform: translateX(2px);
+}
+
+.local-search-item.active {
+  background: #f0f7ff;
   transform: translateX(2px);
 }
 
@@ -758,7 +826,7 @@ onUnmounted(() => {
   color: #213043;
   cursor: pointer;
   box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .theme-toggle-btn:hover,
@@ -860,7 +928,9 @@ onUnmounted(() => {
   padding: 28px 24px 48px;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  background: transparent;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 24%),
+    transparent;
 }
 
 .state-block {
@@ -900,7 +970,7 @@ onUnmounted(() => {
   padding: 18px 18px 4px;
   border: 1px solid rgba(226, 232, 240, 0.75);
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.82);
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
 }
 
@@ -931,7 +1001,7 @@ onUnmounted(() => {
   padding: 18px;
   border-radius: 18px;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  background: #fff;
+  background: rgba(255, 255, 255, 0.96);
   color: inherit;
   text-decoration: none;
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
@@ -1059,16 +1129,20 @@ onUnmounted(() => {
 }
 
 .dark .nav-home {
-  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+  background:
+    radial-gradient(circle at top right, rgba(30, 41, 59, 0.46), transparent 24%),
+    linear-gradient(180deg, #09111f 0%, #0b1324 100%);
 }
 
 .dark .sidebar {
-  background: linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+  background: linear-gradient(180deg, #0d1728 0%, #09111d 100%);
+  border-right-color: rgba(148, 163, 184, 0.08);
 }
 
 .dark .search-header {
-  background: #0f172a;
-  border-bottom-color: rgba(148, 163, 184, 0.08);
+  background: rgba(9, 17, 31, 0.94);
+  border-bottom-color: rgba(71, 85, 105, 0.3);
+  box-shadow: 0 4px 14px rgba(2, 6, 23, 0.28);
 }
 
 .dark .search-container,
@@ -1076,7 +1150,7 @@ onUnmounted(() => {
 .dark .mobile-menu-btn,
 .dark .mobile-menu,
 .dark .local-search-results {
-  background: #1e293b;
+  background: #111c2f;
   color: #e2e8f0;
 }
 
@@ -1084,13 +1158,13 @@ onUnmounted(() => {
 .dark .local-search-results,
 .dark .category-section,
 .dark .site-card {
-  border-color: rgba(71, 85, 105, 0.72);
+  border-color: rgba(71, 85, 105, 0.48);
 }
 
 .dark .search-engine-selector,
 .dark .site-icon {
-  background: #334155;
-  border-color: #475569;
+  background: #162339;
+  border-color: rgba(71, 85, 105, 0.4);
 }
 
 .dark .search-input {
@@ -1116,15 +1190,61 @@ onUnmounted(() => {
 
 .dark .local-search-item:hover,
 .dark .mobile-category-item:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(148, 163, 184, 0.12);
+}
+
+.dark .content-area {
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.42) 0%, rgba(15, 23, 42, 0) 22%),
+    transparent;
+}
+
+.dark .category-item:hover {
+  background: rgba(148, 163, 184, 0.1);
+}
+
+.dark .local-search-item.active {
+  background: rgba(56, 189, 248, 0.16);
 }
 
 .dark .site-card {
-  background: rgba(30, 41, 59, 0.92);
+  background: rgba(15, 23, 42, 0.92);
 }
 
 .dark .site-card:hover {
-  border-color: #475569;
+  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.24);
+}
+
+.dark .category-section {
+  background: rgba(10, 18, 33, 0.82);
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.18);
+}
+
+.dark .search-container {
+  box-shadow: 0 10px 22px rgba(2, 6, 23, 0.22);
+}
+
+.dark .search-container:hover,
+.dark .search-container:focus-within {
+  border-color: rgba(96, 165, 250, 0.26);
+  box-shadow: 0 12px 24px rgba(2, 6, 23, 0.26);
+}
+
+.dark .theme-toggle-btn,
+.dark .mobile-menu-btn {
+  background: #111c2f;
+  box-shadow: 0 10px 20px rgba(2, 6, 23, 0.2);
+}
+
+.dark .github-link {
+  background: rgba(148, 163, 184, 0.08);
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
+.dark .github-link:hover {
+  background: rgba(148, 163, 184, 0.14);
+  border-color: rgba(148, 163, 184, 0.2);
 }
 
 .dark .mobile-menu-header {
