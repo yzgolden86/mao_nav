@@ -216,13 +216,6 @@ export const mockData = {
           "url": "https://panel.yiz.pp.ua",
           "description": "",
           "icon": "https://www.faviconextractor.com/favicon/panel.yiz.pp.ua"
-        },
-        {
-          "id": "site-1775306809248",
-          "name": "宏迪",
-          "url": "https://www.reddit.com",
-          "description": "",
-          "icon": "https://www.faviconextractor.com/favicon/www.reddit.com"
         }
       ]
     },
@@ -632,13 +625,6 @@ export const mockData = {
           "url": "https://console.aiven.io",
           "description": "在线免费数据库",
           "icon": "https://www.faviconextractor.com/favicon/console.aiven.io"
-        },
-        {
-          "id": "site-1775310139676",
-          "name": "52公益站",
-          "url": "https://free.9e.nz",
-          "description": "",
-          "icon": "https://www.faviconextractor.com/favicon/free.9e.nz"
         }
       ]
     },
