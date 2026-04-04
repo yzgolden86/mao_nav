@@ -230,7 +230,6 @@ const unlockError = ref('')
 const isSearchFocused = ref(false)
 
 let searchBlurTimer = null
-let scrollAnimationFrame = null
 
 const searchEngines = {
   google: {
@@ -334,39 +333,11 @@ const shouldShowLocalResults = computed(
   () => isSearchFocused.value && searchQuery.value.trim().length > 0,
 )
 
-const smoothScrollTo = (container, targetTop, duration = 520) => {
-  if (scrollAnimationFrame) {
-    cancelAnimationFrame(scrollAnimationFrame)
-    scrollAnimationFrame = null
-  }
-
-  const startTop = container.scrollTop
-  const distance = targetTop - startTop
-  let startTime = null
-
-  if (Math.abs(distance) < 4) {
-    container.scrollTop = targetTop
-    return
-  }
-
-  const animateScroll = (currentTime) => {
-    if (startTime === null) startTime = currentTime
-    const elapsed = currentTime - startTime
-    const progress = Math.min(elapsed / duration, 1)
-    const eased = progress < 0.5
-      ? 4 * progress * progress * progress
-      : 1 - Math.pow(-2 * progress + 2, 3) / 2
-
-    container.scrollTop = startTop + distance * eased
-
-    if (progress < 1) {
-      scrollAnimationFrame = requestAnimationFrame(animateScroll)
-    } else {
-      scrollAnimationFrame = null
-    }
-  }
-
-  scrollAnimationFrame = requestAnimationFrame(animateScroll)
+const smoothScrollTo = (container, targetTop) => {
+  container.scrollTo({
+    top: targetTop,
+    behavior: 'smooth',
+  })
 }
 
 const scrollToCategory = (categoryId) => {
@@ -378,12 +349,10 @@ const scrollToCategory = (categoryId) => {
   const isMobile = window.innerWidth <= 768
   const elementRect = element.getBoundingClientRect()
   const containerRect = container.getBoundingClientRect()
-  const visualOffset = isMobile ? 12 : 18
+  const visualOffset = isMobile ? 10 : 14
   const targetTop = container.scrollTop + elementRect.top - containerRect.top - visualOffset
-  const distance = Math.abs(targetTop - container.scrollTop)
-  const duration = Math.min(760, Math.max(360, distance * 0.55))
 
-  smoothScrollTo(container, Math.max(0, targetTop), duration)
+  smoothScrollTo(container, Math.max(0, targetTop))
 }
 
 const checkLockStatus = () => {
@@ -503,10 +472,6 @@ onUnmounted(() => {
   if (searchBlurTimer) {
     clearTimeout(searchBlurTimer)
   }
-
-  if (scrollAnimationFrame) {
-    cancelAnimationFrame(scrollAnimationFrame)
-  }
 })
 </script>
 
@@ -515,10 +480,7 @@ onUnmounted(() => {
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 12% 8%, rgba(34, 197, 94, 0.09), transparent 26%),
-    radial-gradient(circle at 92% 12%, rgba(56, 189, 248, 0.08), transparent 24%),
-    linear-gradient(180deg, #f7fafc 0%, #eef3f8 100%);
+  background: linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
 }
 
 .sidebar {
@@ -533,7 +495,7 @@ onUnmounted(() => {
   background: linear-gradient(180deg, #213043 0%, #182334 100%);
   color: #fff;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 2px 0 22px rgba(15, 23, 42, 0.16);
+  box-shadow: 2px 0 16px rgba(15, 23, 42, 0.1);
 }
 
 .logo-section {
@@ -542,7 +504,6 @@ onUnmounted(() => {
   gap: 14px;
   padding: 22px 20px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
 }
 
 .logo {
@@ -550,7 +511,7 @@ onUnmounted(() => {
   height: 56px;
   border-radius: 16px;
   object-fit: cover;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.24);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
 }
 
 .site-title {
@@ -606,7 +567,6 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.03));
 }
 
 .github-link {
@@ -643,10 +603,9 @@ onUnmounted(() => {
   align-items: center;
   gap: 14px;
   padding: 20px 24px;
-  background: rgba(247, 250, 252, 0.88);
-  backdrop-filter: blur(16px);
+  background: #f7fafc;
   border-bottom: 1px solid rgba(148, 163, 184, 0.16);
-  box-shadow: 0 8px 26px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
 .search-shell {
@@ -660,16 +619,16 @@ onUnmounted(() => {
   width: min(760px, 100%);
   display: flex;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.96);
+  background: #fff;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-  transition: box-shadow 0.24s ease, transform 0.24s ease, background-color 0.24s ease;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .search-container:hover,
 .search-container:focus-within {
-  transform: translateY(-1px);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
 }
 
 .search-engine-selector {
@@ -701,6 +660,7 @@ onUnmounted(() => {
 .search-input-wrapper {
   position: relative;
   flex: 1;
+  z-index: 30;
 }
 
 .search-input {
@@ -728,12 +688,12 @@ onUnmounted(() => {
   top: calc(100% + 10px);
   left: 0;
   right: 0;
+  z-index: 60;
   padding: 10px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.98);
+  background: #fff;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.14);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.12);
 }
 
 .search-panel-enter-active,
@@ -898,9 +858,9 @@ onUnmounted(() => {
   flex: 1;
   overflow-y: auto;
   padding: 28px 24px 48px;
-  scroll-behavior: smooth;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  background: transparent;
 }
 
 .state-block {
@@ -940,9 +900,8 @@ onUnmounted(() => {
   padding: 18px 18px 4px;
   border: 1px solid rgba(226, 232, 240, 0.75);
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.44);
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.04);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
 }
 
 .category-section + .category-section {
@@ -972,18 +931,17 @@ onUnmounted(() => {
   padding: 18px;
   border-radius: 18px;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.86));
+  background: #fff;
   color: inherit;
   text-decoration: none;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.03);
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .site-card:hover {
-  transform: translateY(-3px);
-  border-color: #bfdbfe;
-  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
+  border-color: #dbeafe;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
 }
 
 .site-icon {
@@ -1101,10 +1059,7 @@ onUnmounted(() => {
 }
 
 .dark .nav-home {
-  background:
-    radial-gradient(circle at 12% 8%, rgba(94, 234, 212, 0.08), transparent 28%),
-    radial-gradient(circle at 92% 12%, rgba(56, 189, 248, 0.07), transparent 26%),
-    linear-gradient(180deg, #0f172a 0%, #111827 100%);
+  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
 }
 
 .dark .sidebar {
@@ -1112,7 +1067,7 @@ onUnmounted(() => {
 }
 
 .dark .search-header {
-  background: rgba(15, 23, 42, 0.84);
+  background: #0f172a;
   border-bottom-color: rgba(148, 163, 184, 0.08);
 }
 
@@ -1121,7 +1076,7 @@ onUnmounted(() => {
 .dark .mobile-menu-btn,
 .dark .mobile-menu,
 .dark .local-search-results {
-  background: rgba(30, 41, 59, 0.96);
+  background: #1e293b;
   color: #e2e8f0;
 }
 
