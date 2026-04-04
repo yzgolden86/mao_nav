@@ -230,6 +230,7 @@ const unlockError = ref('')
 const isSearchFocused = ref(false)
 
 let searchBlurTimer = null
+let scrollAnimationFrame = null
 
 const searchEngines = {
   google: {
@@ -334,24 +335,38 @@ const shouldShowLocalResults = computed(
 )
 
 const smoothScrollTo = (container, targetTop, duration = 520) => {
+  if (scrollAnimationFrame) {
+    cancelAnimationFrame(scrollAnimationFrame)
+    scrollAnimationFrame = null
+  }
+
   const startTop = container.scrollTop
   const distance = targetTop - startTop
   let startTime = null
+
+  if (Math.abs(distance) < 4) {
+    container.scrollTop = targetTop
+    return
+  }
 
   const animateScroll = (currentTime) => {
     if (startTime === null) startTime = currentTime
     const elapsed = currentTime - startTime
     const progress = Math.min(elapsed / duration, 1)
-    const eased = 1 - Math.pow(1 - progress, 3)
+    const eased = progress < 0.5
+      ? 4 * progress * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 3) / 2
 
     container.scrollTop = startTop + distance * eased
 
     if (progress < 1) {
-      requestAnimationFrame(animateScroll)
+      scrollAnimationFrame = requestAnimationFrame(animateScroll)
+    } else {
+      scrollAnimationFrame = null
     }
   }
 
-  requestAnimationFrame(animateScroll)
+  scrollAnimationFrame = requestAnimationFrame(animateScroll)
 }
 
 const scrollToCategory = (categoryId) => {
@@ -361,8 +376,14 @@ const scrollToCategory = (categoryId) => {
   if (!element || !container) return
 
   const isMobile = window.innerWidth <= 768
-  const offset = isMobile ? 92 : 28
-  smoothScrollTo(container, Math.max(0, element.offsetTop - offset))
+  const elementRect = element.getBoundingClientRect()
+  const containerRect = container.getBoundingClientRect()
+  const visualOffset = isMobile ? 12 : 18
+  const targetTop = container.scrollTop + elementRect.top - containerRect.top - visualOffset
+  const distance = Math.abs(targetTop - container.scrollTop)
+  const duration = Math.min(760, Math.max(360, distance * 0.55))
+
+  smoothScrollTo(container, Math.max(0, targetTop), duration)
 }
 
 const checkLockStatus = () => {
@@ -482,6 +503,10 @@ onUnmounted(() => {
   if (searchBlurTimer) {
     clearTimeout(searchBlurTimer)
   }
+
+  if (scrollAnimationFrame) {
+    cancelAnimationFrame(scrollAnimationFrame)
+  }
 })
 </script>
 
@@ -491,7 +516,8 @@ onUnmounted(() => {
   height: 100vh;
   overflow: hidden;
   background:
-    radial-gradient(circle at top left, rgba(34, 197, 94, 0.08), transparent 30%),
+    radial-gradient(circle at 12% 8%, rgba(34, 197, 94, 0.09), transparent 26%),
+    radial-gradient(circle at 92% 12%, rgba(56, 189, 248, 0.08), transparent 24%),
     linear-gradient(180deg, #f7fafc 0%, #eef3f8 100%);
 }
 
@@ -506,7 +532,8 @@ onUnmounted(() => {
   overflow: hidden;
   background: linear-gradient(180deg, #213043 0%, #182334 100%);
   color: #fff;
-  box-shadow: 2px 0 18px rgba(15, 23, 42, 0.12);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 2px 0 22px rgba(15, 23, 42, 0.16);
 }
 
 .logo-section {
@@ -515,6 +542,7 @@ onUnmounted(() => {
   gap: 14px;
   padding: 22px 20px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
 }
 
 .logo {
@@ -563,7 +591,8 @@ onUnmounted(() => {
 
 .category-item {
   padding: 12px 20px;
-  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 0 14px 14px 0;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
 .category-item:hover {
@@ -577,6 +606,7 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.03));
 }
 
 .github-link {
@@ -604,6 +634,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-width: 0;
 }
 
 .search-header {
@@ -615,6 +646,7 @@ onUnmounted(() => {
   background: rgba(247, 250, 252, 0.88);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 8px 26px rgba(15, 23, 42, 0.04);
 }
 
 .search-shell {
@@ -629,6 +661,7 @@ onUnmounted(() => {
   display: flex;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
   transition: box-shadow 0.24s ease, transform 0.24s ease, background-color 0.24s ease;
 }
@@ -636,7 +669,7 @@ onUnmounted(() => {
 .search-container:hover,
 .search-container:focus-within {
   transform: translateY(-1px);
-  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
 }
 
 .search-engine-selector {
@@ -698,6 +731,7 @@ onUnmounted(() => {
   padding: 10px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.14);
   backdrop-filter: blur(12px);
 }
@@ -902,8 +936,17 @@ onUnmounted(() => {
   margin: 0 auto;
 }
 
+.category-section {
+  padding: 18px 18px 4px;
+  border: 1px solid rgba(226, 232, 240, 0.75);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.44);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.04);
+  backdrop-filter: blur(10px);
+}
+
 .category-section + .category-section {
-  margin-top: 42px;
+  margin-top: 24px;
 }
 
 .category-title {
@@ -913,6 +956,7 @@ onUnmounted(() => {
   margin: 0 0 18px;
   color: #233142;
   font-size: 28px;
+  letter-spacing: 0.01em;
 }
 
 .sites-grid {
@@ -928,7 +972,8 @@ onUnmounted(() => {
   padding: 18px;
   border-radius: 18px;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  background: rgba(255, 255, 255, 0.92);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.86));
   color: inherit;
   text-decoration: none;
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.03);
@@ -937,8 +982,8 @@ onUnmounted(() => {
 
 .site-card:hover {
   transform: translateY(-3px);
-  border-color: #c7d2fe;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
+  border-color: #bfdbfe;
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.1);
 }
 
 .site-icon {
@@ -1057,7 +1102,8 @@ onUnmounted(() => {
 
 .dark .nav-home {
   background:
-    radial-gradient(circle at top left, rgba(94, 234, 212, 0.08), transparent 30%),
+    radial-gradient(circle at 12% 8%, rgba(94, 234, 212, 0.08), transparent 28%),
+    radial-gradient(circle at 92% 12%, rgba(56, 189, 248, 0.07), transparent 26%),
     linear-gradient(180deg, #0f172a 0%, #111827 100%);
 }
 
@@ -1077,6 +1123,13 @@ onUnmounted(() => {
 .dark .local-search-results {
   background: rgba(30, 41, 59, 0.96);
   color: #e2e8f0;
+}
+
+.dark .search-container,
+.dark .local-search-results,
+.dark .category-section,
+.dark .site-card {
+  border-color: rgba(71, 85, 105, 0.72);
 }
 
 .dark .search-engine-selector,
@@ -1112,7 +1165,6 @@ onUnmounted(() => {
 }
 
 .dark .site-card {
-  border-color: #334155;
   background: rgba(30, 41, 59, 0.92);
 }
 
@@ -1171,6 +1223,11 @@ onUnmounted(() => {
 
   .content-area {
     padding: 94px 16px 34px;
+  }
+
+  .category-section {
+    padding: 16px 14px 4px;
+    border-radius: 20px;
   }
 
   .sites-grid {
