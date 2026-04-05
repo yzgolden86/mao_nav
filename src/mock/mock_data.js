@@ -698,13 +698,6 @@ export const mockData = {
           "icon": "https://rivers.chaitin.cn/favicon.ico"
         },
         {
-          "id": "site-1754653100309",
-          "name": "IT-TOOLS",
-          "url": "https://it-tools.tech/",
-          "description": "",
-          "icon": "https://it-tools.tech/favicon-32x32.png"
-        },
-        {
           "id": "site-1754653131195",
           "name": "开发者武器库",
           "url": "https://devtool.tech/",
