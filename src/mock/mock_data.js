@@ -868,13 +868,6 @@ export const mockData = {
           "icon": "https://www.itdog.cn/favicon.ico"
         },
         {
-          "id": "site-1754654075959",
-          "name": "sms-activate",
-          "url": "https://sms-activate.io/",
-          "description": "接码平台",
-          "icon": "https://smsactivate.s3.eu-central-1.amazonaws.com/assets/img/logoMeta.png"
-        },
-        {
           "id": "site-1754654120227",
           "name": "ipdata",
           "url": "https://ipdata.co/",
