@@ -216,6 +216,13 @@ export const mockData = {
           "url": "https://panel.yiz.pp.ua",
           "description": "",
           "icon": "https://www.faviconextractor.com/favicon/panel.yiz.pp.ua"
+        },
+        {
+          "id": "site-1778556577282",
+          "name": "图片拼接",
+          "url": "https://pix.gofor.eu.cc/",
+          "description": "快捷图片拼接",
+          "icon": "https://www.faviconextractor.com/favicon/pix.gofor.eu.cc"
         }
       ]
     },
