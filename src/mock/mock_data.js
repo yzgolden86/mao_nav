@@ -223,6 +223,13 @@ export const mockData = {
           "url": "https://pix.gofor.eu.cc/",
           "description": "快捷图片拼接",
           "icon": "https://www.faviconextractor.com/favicon/pix.gofor.eu.cc"
+        },
+        {
+          "id": "site-1780148978292",
+          "name": "GOVPS",
+          "url": "https://monitor.zltrade.pp.ua/",
+          "description": "自建vps监控",
+          "icon": "https://www.faviconextractor.com/favicon/monitor.zltrade.pp.ua"
         }
       ]
     },
