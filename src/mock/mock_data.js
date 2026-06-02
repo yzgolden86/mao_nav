@@ -230,6 +230,13 @@ export const mockData = {
           "url": "https://monitor.zltrade.pp.ua/",
           "description": "自建vps监控",
           "icon": "https://www.faviconextractor.com/favicon/monitor.zltrade.pp.ua"
+        },
+        {
+          "id": "site-1780369513528",
+          "name": "Qreminder",
+          "url": "https://qreminder.685586.xyz/",
+          "description": "订阅管理，到期提醒",
+          "icon": "https://www.faviconextractor.com/favicon/qreminder.685586.xyz"
         }
       ]
     },
