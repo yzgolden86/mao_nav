@@ -430,17 +430,10 @@ export const mockData = {
         },
         {
           "id": "site-1775115396975",
-          "name": "New-API",
-          "url": "https://newapi.yiz.pp.ua",
+          "name": "sub2api",
+          "url": "https://sub2.yiz.pp.ua/",
           "description": "API分发管理平台 多人用",
-          "icon": "https://www.faviconextractor.com/favicon/newapi.yiz.pp.ua"
-        },
-        {
-          "id": "site-1775115430553",
-          "name": "Resin",
-          "url": "https://resin.yiz.pp.ua/ui/dashboard",
-          "description": "代理池",
-          "icon": "https://www.faviconextractor.com/favicon/resin.yiz.pp.ua"
+          "icon": "https://www.faviconextractor.com/favicon/sub2.yiz.pp.ua"
         },
         {
           "id": "site-1775115463138",
@@ -448,6 +441,13 @@ export const mockData = {
           "url": "https://grok.yiz.pp.ua",
           "description": "",
           "icon": "https://www.faviconextractor.com/favicon/grok.yiz.pp.ua"
+        },
+        {
+          "id": "site-1781053231870",
+          "name": "GPTDRAW",
+          "url": "https://gptdraw.yiz.pp.ua/",
+          "description": "gpt画图",
+          "icon": "https://www.faviconextractor.com/favicon/gptdraw.yiz.pp.ua"
         }
       ]
     },
