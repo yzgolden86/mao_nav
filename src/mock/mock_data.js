@@ -106,13 +106,6 @@ export const mockData = {
           "icon": "https://imgbed.685586.xyz/logo.png"
         },
         {
-          "id": "site-1754645905719",
-          "name": "VPS监控",
-          "url": "https://fyjitvnk.us-east-1.clawcloudrun.com/",
-          "description": "komari monitor",
-          "icon": "https://fyjitvnk.us-east-1.clawcloudrun.com/favicon.ico"
-        },
-        {
           "id": "site-1754646292507",
           "name": "Sink短链服务",
           "url": "https://sink.685586.xyz/",
@@ -303,6 +296,13 @@ export const mockData = {
           "icon": "https://ppl-ai-public.s3.amazonaws.com/static/img/pplx-default-preview.png"
         },
         {
+          "id": "site-1792417818411",
+          "name": "command code",
+          "url": "https://commandcode.ai/",
+          "description": "AI服务提供商，类似于opencode",
+          "icon": "https://www.faviconextractor.com/favicon/commandcode.ai"
+        },
+        {
           "id": "site-1754648497156",
           "name": "Ask AI",
           "url": "https://iask.ai/",
@@ -422,11 +422,18 @@ export const mockData = {
           "icon": "https://www.faviconextractor.com/favicon/cpa.yiz.pp.ua"
         },
         {
+          "id": "site-1792417274022",
+          "name": "cpa manager",
+          "url": "https://cpaman.yiz.pp.ua/management.html",
+          "description": "cpa manager",
+          "icon": "https://www.faviconextractor.com/favicon/cpaman.yiz.pp.ua"
+        },
+        {
           "id": "site-1775115365368",
-          "name": "MetAPI",
-          "url": "https://metapi.yiz.pp.ua",
+          "name": "枢衡 pivotflow",
+          "url": "https://pivot.yiz.pp.ua",
           "description": "API分发管理平台，个人用",
-          "icon": "https://www.faviconextractor.com/favicon/metapi.yiz.pp.ua"
+          "icon": "https://www.faviconextractor.com/favicon/pivot.yiz.pp.ua"
         },
         {
           "id": "site-1775115396975",
@@ -438,9 +445,9 @@ export const mockData = {
         {
           "id": "site-1775115463138",
           "name": "Grok2API",
-          "url": "https://grok.yiz.pp.ua",
+          "url": "https://grok2.yiz.pp.ua",
           "description": "",
-          "icon": "https://www.faviconextractor.com/favicon/grok.yiz.pp.ua"
+          "icon": "https://www.faviconextractor.com/favicon/grok2.yiz.pp.ua"
         },
         {
           "id": "site-1781053231870",
@@ -448,6 +455,20 @@ export const mockData = {
           "url": "https://gptdraw.yiz.pp.ua/",
           "description": "gpt画图",
           "icon": "https://www.faviconextractor.com/favicon/gptdraw.yiz.pp.ua"
+        },
+        {
+          "id": "site-1792417372702",
+          "name": "ccload",
+          "url": "https://ccload.yiz.pp.ua/",
+          "description": "API分发",
+          "icon": "https://www.faviconextractor.com/favicon/ccload.yiz.pp.ua"
+        },
+        {
+          "id": "site-1792417468711",
+          "name": "deeix",
+          "url": "https://deeix.yiz.pp.ua/",
+          "description": "又一个在线的AI智能体服务",
+          "icon": "https://www.faviconextractor.com/favicon/deeix.yiz.pp.ua"
         }
       ]
     },
